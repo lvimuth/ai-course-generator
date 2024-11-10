@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { Open_Sans } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
 
 const openSans = Open_Sans({
   subsets: ["latin"],
@@ -26,14 +26,15 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
+    <html lang="en">
+      <ClerkProvider>
+        <GoogleOneTap />
         <body
           className={`${openSans.className} ${geistMono.variable} antialiased`}
         >
           {children}
         </body>
-      </html>
-    </ClerkProvider>
+      </ClerkProvider>
+    </html>
   );
 }
