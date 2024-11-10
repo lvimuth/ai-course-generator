@@ -8,6 +8,7 @@ import { IoShieldOutline } from "react-icons/io5";
 import { CiLogout } from "react-icons/ci";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { Progress } from "@/components/ui/progress";
 
 function SideBar() {
   const Menu = [
@@ -58,6 +59,9 @@ function SideBar() {
           </Link>
         ))}
       </ul>
+      <div>
+        <Progress value={33} />
+      </div>
     </div>
   );
 }
