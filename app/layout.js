@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { Open_Sans } from "next/font/google";
+import { Open_Sans, Roboto } from "next/font/google";
 import { ClerkProvider, GoogleOneTap } from "@clerk/nextjs";
 
 const openSans = Open_Sans({

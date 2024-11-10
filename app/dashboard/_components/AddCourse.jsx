@@ -1,13 +1,14 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { useUser } from "@clerk/nextjs";
 import React from "react";
 
 function AddCourse() {
   const { user } = useUser();
   return (
-    <div>
-      <div>
+    <div className="flex items-center justify-between flex-col md:flex-row gap-5">
+      <div className="">
         <h2 className="text-2xl">
           Hello,{" "}
           <span className="font-bold">
@@ -16,7 +17,11 @@ function AddCourse() {
             {user?.lastName.substring(1)}
           </span>
         </h2>
+        <p className="text-sm text-gray-500">
+          Create new course with AI, share with friends and Earn from it.
+        </p>
       </div>
+      <Button>+ Create AI Course</Button>
     </div>
   );
 }
