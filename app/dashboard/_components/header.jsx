@@ -5,7 +5,7 @@ import React from "react";
 function Header() {
   return (
     <div className="flex justify-between p-5 shadow-sm">
-      <Image src={"/favicon.svg"} width={30} height={50} />
+      <Image src={"/favicon.svg"} width={30} height={30} alt="" />
       <UserButton />
     </div>
   );
