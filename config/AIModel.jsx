@@ -1,4 +1,6 @@
-const apiKey = process.env.GEMINI_API_KEY;
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
@@ -13,7 +15,7 @@ const generationConfig = {
   responseMimeType: "application/json",
 };
 
-export const GenerateCourseLayoout = model.startChat({
+export const GenerateCourseLayout_AI = model.startChat({
   generationConfig,
   history: [
     {
