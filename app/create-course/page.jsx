@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   HiClipboardDocumentCheck,
   HiLightBulb,
@@ -9,6 +9,7 @@ import {
 import SelectCategory from "./_components/SelectCategory";
 import TopicDescription from "./_components/TopicDescription";
 import SelectOption from "./_components/SelectOption";
+import { UserInputContext } from "../_context/UserInputContext";
 
 function CreateCourse() {
   const StepperOption = [
@@ -28,7 +29,11 @@ function CreateCourse() {
       icon: <HiClipboardDocumentCheck />,
     },
   ];
+  const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
   const [activeIndex, setActiveIndex] = useState(0);
+  useEffect(() => {
+    console.log(userCourseInput);
+  }, [userCourseInput]);
 
   const GenerateCourseLayout = () => {
     const BASIC_PROMPT =
@@ -59,7 +64,7 @@ function CreateCourse() {
               <div className="flex flex-col items-center w-[50px] md:w-[120px]  ">
                 <div
                   className={`bg-gray-200 p-3 rounded-full text-white ${
-                    activeIndex >= index && "bg-blue-500"
+                    activeIndex >= index && "bg-gray-500"
                   }`}
                 >
                   {item.icon}
@@ -69,7 +74,7 @@ function CreateCourse() {
               {index !== StepperOption?.length - 1 && (
                 <div
                   className={`h-1 w-[50px] md:w-[100px] rounded-full lg:w-[170px] bg-gray-300 mt-5 ${
-                    activeIndex - 1 >= index && `bg-blue-500`
+                    activeIndex - 1 >= index && `bg-gray-500`
                   }`}
                 ></div>
               )}

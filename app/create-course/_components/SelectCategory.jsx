@@ -1,8 +1,17 @@
+import { UserInputContext } from "@/app/_context/UserInputContext";
 import CategoryList from "@/app/_shared/CategoryList";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 
 function SelectCategory() {
+  const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
+  const handleCategoryChange = (category) => {
+    setUserCourseInput((prev) => ({
+      ...prev,
+      category: category,
+    }));
+  };
+
   return (
     <div>
       <h2 className="my-5">Select the Course Category</h2>
@@ -10,8 +19,12 @@ function SelectCategory() {
         {CategoryList.map((item, index) => (
           <div
             key={index}
-            className="group flex flex-col p-5 border items-center rounded-xl hover:border-primary hover:bg-gray-50 cursor-pointer"
+            className={`group flex flex-col p-5 border items-center rounded-xl hover:border-primary hover:bg-gray-50 cursor-pointer ${
+              userCourseInput?.category == item.name &&
+              "border-primary bg-gray-50 "
+            }`}
             title={item.name}
+            onClick={() => handleCategoryChange(item.name)}
           >
             <Image src={item.icon} width={50} height={50} alt="" />
             <h2 className="hidden xl:block text-center md:text-sm">

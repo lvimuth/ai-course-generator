@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 function SelectOption() {
   return (
     <div className="px-10">
-      <div className="grid grid-cols-2 gap-10">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-10 ">
         <div>
           <label htmlFor="" className="text-sm">
             Difficulty Level
