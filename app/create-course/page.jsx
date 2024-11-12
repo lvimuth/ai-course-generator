@@ -41,7 +41,7 @@ function CreateCourse() {
               <div className="flex flex-col items-center w-[50px] md:w-[120px]  ">
                 <div
                   className={`bg-gray-200 p-3 rounded-full text-white ${
-                    activeIndex >= index && "bg-gray-500"
+                    activeIndex >= index && "bg-blue-500"
                   }`}
                 >
                   {item.icon}
@@ -51,7 +51,7 @@ function CreateCourse() {
               {index !== StepperOption?.length - 1 && (
                 <div
                   className={`h-1 w-[50px] md:w-[100px] rounded-full lg:w-[170px] bg-gray-300 mt-5 ${
-                    activeIndex - 1 >= index && `bg-red-500`
+                    activeIndex - 1 >= index && `bg-blue-500`
                   }`}
                 ></div>
               )}

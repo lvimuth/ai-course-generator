@@ -10,7 +10,7 @@ function CreateCourseLayout({ children }) {
       </div>
       <div className="md:ml-64">
         <Header />
-        <div className="p-10">{children}</div>
+        <div className="p-3 lg:py-10">{children}</div>
       </div>
     </div>
   );
