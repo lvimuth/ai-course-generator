@@ -6,6 +6,8 @@ import {
   HiLightBulb,
   HiMiniSquares2X2,
 } from "react-icons/hi2";
+import SelectCategory from "./_components/SelectCategory";
+import TopicDescription from "./_components/TopicDescription";
 
 function CreateCourse() {
   const StepperOption = [
@@ -57,10 +59,35 @@ function CreateCourse() {
         </div>
       </div>
 
-      {/* Componect */}
+      <div className="px-10 md:px-20 lg:px-44 mt-10">
+        {/* Componect */}
+        {activeIndex == 0 ? (
+          <SelectCategory />
+        ) : activeIndex == 1 ? (
+          <TopicDescription />
+        ) : null}
 
-      {/* Next previous button */}
-      <Button onClick={() => setActiveIndex(activeIndex + 1)}>Next</Button>
+        {/* Next previous button */}
+        <div className="flex justify-between mt-10">
+          <Button
+            disabled={activeIndex == 0}
+            onClick={() => setActiveIndex(activeIndex - 1)}
+            variant="outline"
+          >
+            Back
+          </Button>
+          {activeIndex < 2 && (
+            <Button onClick={() => setActiveIndex(activeIndex + 1)}>
+              Next
+            </Button>
+          )}
+          {activeIndex == 2 && (
+            <Button onClick={() => setActiveIndex(activeIndex + 1)}>
+              Generate
+            </Button>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
