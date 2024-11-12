@@ -27,14 +27,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <ClerkProvider>
-        <GoogleOneTap />
-        <body
-          className={`${openSans.className} ${geistMono.variable} antialiased`}
-        >
+      <body
+        className={`${openSans.className} ${geistMono.variable} antialiased`}
+      >
+        <ClerkProvider>
+          <GoogleOneTap />
           {children}
-        </body>
-      </ClerkProvider>
+        </ClerkProvider>
+      </body>
     </html>
   );
 }
