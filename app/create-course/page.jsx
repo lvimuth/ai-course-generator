@@ -35,6 +35,35 @@ function CreateCourse() {
     console.log(userCourseInput);
   }, [userCourseInput]);
 
+  const checkStatus = () => {
+    if (userCourseInput?.length == 0) {
+      return true;
+    }
+    if (
+      activeIndex == 0 &&
+      (userCourseInput?.category?.length == 0 ||
+        userCourseInput?.category == undefined)
+    ) {
+      return true;
+    }
+    if (
+      activeIndex == 1 &&
+      (userCourseInput?.topic?.length == 0 ||
+        userCourseInput?.topic == undefined)
+    ) {
+      return true;
+    } else if (
+      activeIndex == 2 &&
+      (userCourseInput?.level == undefined ||
+        userCourseInput?.duration == undefined ||
+        userCourseInput?.displayVideo == undefined ||
+        userCourseInput?.noOfChapter == undefined)
+    ) {
+      return true;
+    }
+    return false;
+  };
+
   const GenerateCourseLayout = () => {
     const BASIC_PROMPT =
       "generate a course tutorial on following details with field of Course Name, Description, Along with Chapter Name, About, Duration, ";
@@ -43,6 +72,8 @@ function CreateCourse() {
       userCourseInput?.category +
       ", Topic: " +
       userCourseInput?.topic +
+      "Description: " +
+      userCourseInput?.description +
       " Difficulty Level: " +
       userCourseInput?.level +
       " Duration: " +
@@ -103,12 +134,18 @@ function CreateCourse() {
             Back
           </Button>
           {activeIndex < 2 && (
-            <Button onClick={() => setActiveIndex(activeIndex + 1)}>
+            <Button
+              onClick={() => setActiveIndex(activeIndex + 1)}
+              disabled={checkStatus()}
+            >
               Next
             </Button>
           )}
           {activeIndex == 2 && (
-            <Button onClick={() => GenerateCourseLayout()}>
+            <Button
+              onClick={() => GenerateCourseLayout()}
+              disabled={checkStatus()}
+            >
               Generate Course Layout
             </Button>
           )}

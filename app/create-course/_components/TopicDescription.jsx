@@ -23,6 +23,7 @@ function TopicDescription() {
           required
           placeholder={"Topic"}
           className="h-14 text-sm"
+          defaultValue={userCourseInput?.topic}
           onChange={(e) => {
             handleInputChange("topic", e.target.value);
           }}
@@ -36,6 +37,7 @@ function TopicDescription() {
         <Textarea
           placeholder="About your course"
           className="h-24 text-sm"
+          defaultValue={userCourseInput?.description}
           onChange={(e) => {
             handleInputChange("description", e.target.value);
           }}

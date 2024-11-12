@@ -19,6 +19,7 @@ function SelectCategory() {
         {CategoryList.map((item, index) => (
           <div
             key={index}
+            defaultValue={userCourseInput?.category}
             className={`group flex flex-col p-5 border items-center rounded-xl hover:border-primary hover:bg-gray-50 cursor-pointer ${
               userCourseInput?.category == item.name &&
               "border-primary bg-gray-50 "
