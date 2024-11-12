@@ -30,6 +30,24 @@ function CreateCourse() {
   ];
   const [activeIndex, setActiveIndex] = useState(0);
 
+  const GenerateCourseLayout = () => {
+    const BASIC_PROMPT =
+      "generate a course tutorial on following details with field of Course Name, Description, Along with Chapter Name, About, Duration, ";
+    const USER_INPUT_PROMPT =
+      "Category : " +
+      userCourseInput?.category +
+      ", Topic: " +
+      userCourseInput?.topic +
+      " Difficulty Level: " +
+      userCourseInput?.level +
+      " Duration: " +
+      userCourseInput?.duration +
+      " No of Chapters:" +
+      userCourseInput?.noOfChapter +
+      ", in JSON format";
+    const FINAL_PROMPT = BASIC_PROMPT + USER_INPUT_PROMPT;
+  };
+
   return (
     <div>
       {/* Stepper */}
@@ -85,8 +103,8 @@ function CreateCourse() {
             </Button>
           )}
           {activeIndex == 2 && (
-            <Button onClick={() => setActiveIndex(activeIndex + 1)}>
-              Generate
+            <Button onClick={() => GenerateCourseLayout()}>
+              Generate Course Layout
             </Button>
           )}
         </div>
