@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 function TopicDescription() {
   return (
-    <div className="mx-10">
+    <div className="mx-1 lg:mx-10">
       {/* Topic */}
       <div className="mt-5">
         <label htmlFor="" className="text-xs md:text-sm">

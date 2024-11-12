@@ -60,7 +60,7 @@ function CreateCourse() {
         </div>
       </div>
 
-      <div className="px-10 md:px-10 lg:px-10 mt-10">
+      <div className="px-1 md:px-10 lg:px-10 mt-10">
         {/* Componect */}
         {activeIndex == 0 ? (
           <SelectCategory />
