@@ -43,7 +43,7 @@ function SideBar() {
   return (
     <div className="fixed h-full md:w-64 p-5 shadow-md">
       <Image src={"/logo.svg"} alt="" width={160} height={100} />
-      <hr className="my-5" />
+      <hr className="my-3" />
 
       {Menu.map((item, index) => (
         <ul key={index}>

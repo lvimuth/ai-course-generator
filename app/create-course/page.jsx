@@ -8,6 +8,7 @@ import {
 } from "react-icons/hi2";
 import SelectCategory from "./_components/SelectCategory";
 import TopicDescription from "./_components/TopicDescription";
+import SelectOption from "./_components/SelectOption";
 
 function CreateCourse() {
   const StepperOption = [
@@ -59,12 +60,14 @@ function CreateCourse() {
         </div>
       </div>
 
-      <div className="px-10 md:px-20 lg:px-44 mt-10">
+      <div className="px-10 md:px-10 lg:px-10 mt-10">
         {/* Componect */}
         {activeIndex == 0 ? (
           <SelectCategory />
         ) : activeIndex == 1 ? (
           <TopicDescription />
+        ) : activeIndex == 2 ? (
+          <SelectOption />
         ) : null}
 
         {/* Next previous button */}
