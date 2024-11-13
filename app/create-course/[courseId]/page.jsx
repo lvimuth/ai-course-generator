@@ -32,16 +32,18 @@ function CourseLayout({ params }) {
   };
   return (
     <div className="px-7 md:px-20 lg:px44">
-      <h2 className="font-bold text-center text-5xl text-primary">Course Layout</h2>
+      <h2 className="font-bold text-center text-5xl text-primary">
+        Course Layout
+      </h2>
 
       {/* Basic Info */}
-      <CourseBasics course={course} />
+      <CourseBasics course={course} refreshData={() => GetCourse()} />
 
       {/* Course Details */}
       <CourseDetails course={course} />
 
       {/* List of Chapters or Lessons */}
-      <ChapterList course={course} />
+      <ChapterList course={course} refreshData={() => GetCourse()} />
     </div>
   );
 }

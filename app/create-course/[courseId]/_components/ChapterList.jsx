@@ -1,7 +1,8 @@
 import React from "react";
 import { HiOutlineClock, HiOutlineCheckCircle } from "react-icons/hi";
+import EditChapter from "./EditChapter";
 
-function ChapterList({ course }) {
+function ChapterList({ course, refreshData }) {
   return (
     <div className="mt-3">
       <h2 className="font-medium text-xl">Chapters</h2>
@@ -13,7 +14,14 @@ function ChapterList({ course }) {
                 {index + 1}
               </h2>
               <div>
-                <h2 className="font-medium text-lg">{chapter?.chapter_name}</h2>
+                <h2 className="font-medium text-lg">
+                  {chapter?.chapter_name}
+                  <EditChapter
+                    course={course}
+                    index={index}
+                    refreshData={() => refreshData(true)}
+                  />
+                </h2>
                 <p className="text-sm text-gray-500">{chapter?.about}</p>
                 <p className="flex gap-2 items-center text-primary">
                   <HiOutlineClock />

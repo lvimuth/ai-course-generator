@@ -10,27 +10,26 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { HiOutlinePencilAlt } from "react-icons/hi";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { CourseList } from "@/config/schema";
-import { eq } from "drizzle-orm";
 import { db } from "@/config/db";
+import { eq } from "drizzle-orm";
+import { CourseList } from "@/config/schema";
 
-function EditCourseBasicInfo({ course,refreshData }) {
+function EditChapter({ course, index ,refreshData}) {
+  const Chapters = course?.courseOutput?.chapters;
+
   const [name, setName] = useState();
-  const [description, setDescription] = useState();
-
+  const [about, setAbout] = useState();
   useEffect(() => {
-    setName(course?.courseOutput?.course_name);
-    setDescription(course?.courseOutput?.description);
+    setName(Chapters[index].chapter_name);
+    setAbout(Chapters[index].about);
   }, [course]);
 
   const onUpdateHandler = async () => {
-    course.courseOutput.course_name = name;
-    course.courseOutput.description = description;
-
-    console.log(course);
+    Chapters[index].chapter_name = name;
+    Chapters[index].about = about;
 
     const result = await db
       .update(CourseList)
@@ -40,9 +39,9 @@ function EditCourseBasicInfo({ course,refreshData }) {
       .where(eq(CourseList?.id, course?.id))
       .returning({ id: CourseList.id });
 
+    console.log(result);
     refreshData(true);
   };
-
   return (
     <div>
       <Dialog>
@@ -51,12 +50,12 @@ function EditCourseBasicInfo({ course,refreshData }) {
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Edit course Title and Description</DialogTitle>
+            <DialogTitle>Edit Chapter</DialogTitle>
             <DialogDescription>
               <div className="mt-3">
                 <label htmlFor="">Course Title</label>
                 <Input
-                  defaultValue={course?.courseOutput?.course_name}
+                  defaultValue={Chapters[index].chapter_name}
                   onChange={(event) => {
                     setName(event?.target.value);
                   }}
@@ -66,9 +65,9 @@ function EditCourseBasicInfo({ course,refreshData }) {
                 <label htmlFor="">Course Discription</label>
                 <Textarea
                   className="h-40"
-                  defaultValue={course?.courseOutput?.description}
+                  defaultValue={Chapters[index].about}
                   onChange={(event) => {
-                    setDescription(event?.target.value);
+                    setAbout(event?.target.value);
                   }}
                 />
               </div>
@@ -85,4 +84,4 @@ function EditCourseBasicInfo({ course,refreshData }) {
   );
 }
 
-export default EditCourseBasicInfo;
+export default EditChapter;

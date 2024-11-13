@@ -4,14 +4,17 @@ import React from "react";
 import { HiOutlinePuzzle } from "react-icons/hi";
 import EditCourseBasicInfo from "./EditCourseBasicInfo";
 
-function CourseBasics({ course }) {
+function CourseBasics({ course, refreshData }) {
   return (
     <div className="border rounded-xl shadow-md mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
         <div>
           <h2 className="font-bold text-3xl text-primary">
             {course?.courseOutput?.course_name}
-            <EditCourseBasicInfo course={course} />
+            <EditCourseBasicInfo
+              course={course}
+              refreshData={() => refreshData(true)}
+            />
           </h2>
           <p className="text-sm text-gray-400 mt-3">
             {course?.courseOutput?.description}
