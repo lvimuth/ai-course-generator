@@ -18,12 +18,14 @@ function LoadingDialog({ loading }) {
       <AlertDialog open={loading}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogDescription>
+            <AlertDialogTitle>
+              {" "}
               <div className="flex flex-col items-center py-10">
-                              <Image src={"/rocket.gif"} width={100} height={100} alt="" />
-                              <h2>Please wait... AI working</h2>
+                <Image src={"/rocket.gif"} width={100} height={100} alt="" />
+                <h2>Please wait... AI working</h2>
               </div>
-            </AlertDialogDescription>
+            </AlertDialogTitle>
+            <AlertDialogDescription></AlertDialogDescription>
           </AlertDialogHeader>
         </AlertDialogContent>
       </AlertDialog>

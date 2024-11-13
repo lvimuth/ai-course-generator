@@ -12,8 +12,13 @@ import SelectOption from "./_components/SelectOption";
 import { UserInputContext } from "../_context/UserInputContext";
 import { GenerateCourseLayout_AI } from "@/config/AIModel";
 import LoadingDialog from "./_components/LoadingDialog";
+import { db } from "@/config/db";
+import { CourseList } from "@/config/schema";
+import uuid4 from "uuid4";
+import { useUser } from "@clerk/nextjs";
 
 function CreateCourse() {
+  const { user } = useUser();
   const StepperOption = [
     {
       id: 1,
@@ -67,6 +72,25 @@ function CreateCourse() {
     return false;
   };
 
+  const SaveCourseLayoutInDB = async (courseLayout) => {
+    var id = uuid4();
+    setLoading(true);
+    const result = await db.insert(CourseList).values({
+      corseId: id,
+      name: userCourseInput?.topic,
+      category: userCourseInput?.category,
+      description: userCourseInput?.description,
+      level: userCourseInput?.level,
+      duration: userCourseInput?.duration,
+      courseOutput: courseLayout,
+      createdBy: user?.primaryEmailAddress?.emailAddress,
+      userName: user?.fullName,
+      userProfileImage: user?.imageUrl,
+    });
+    console.log("Finished Course");
+    setLoading(false);
+  };
+
   const GenerateCourseLayout = async () => {
     setLoading(true);
     const BASIC_PROMPT =
@@ -92,6 +116,7 @@ function CreateCourse() {
     console.log(result.response?.text());
     console.log(JSON.parse(result.response?.text()));
     setLoading(false);
+    SaveCourseLayoutInDB(JSON.parse(result.response?.text()));
   };
 
   return (
