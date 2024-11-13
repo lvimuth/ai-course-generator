@@ -8,7 +8,7 @@ function CourseBasics({ course }) {
     <div className="border rounded-xl shadow-md mt-5">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5">
         <div>
-          <h2 className="font-bold text-3xl">
+          <h2 className="font-bold text-3xl text-primary">
             {course?.courseOutput?.course_name}
           </h2>
           <p className="text-sm text-gray-400 mt-3">

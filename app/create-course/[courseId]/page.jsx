@@ -7,6 +7,7 @@ import { and, eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import CourseBasics from "./_components/CourseBasics";
 import CourseDetails from "./_components/CourseDetails";
+import ChapterList from "./_components/ChapterList";
 
 function CourseLayout({ params }) {
   const { user } = useUser();
@@ -30,8 +31,8 @@ function CourseLayout({ params }) {
     console.log(result);
   };
   return (
-    <div className="mt-20 px-7 md:px-20 lg:px44">
-      <h2 className="font-bold text-center text-2xl">Course Layout</h2>
+    <div className="px-7 md:px-20 lg:px44">
+      <h2 className="font-bold text-center text-5xl text-primary">Course Layout</h2>
 
       {/* Basic Info */}
       <CourseBasics course={course} />
@@ -40,6 +41,7 @@ function CourseLayout({ params }) {
       <CourseDetails course={course} />
 
       {/* List of Chapters or Lessons */}
+      <ChapterList course={course} />
     </div>
   );
 }
