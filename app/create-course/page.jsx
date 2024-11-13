@@ -16,6 +16,7 @@ import { db } from "@/config/db";
 import { CourseList } from "@/config/schema";
 import uuid4 from "uuid4";
 import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 function CreateCourse() {
   const { user } = useUser();
@@ -39,6 +40,7 @@ function CreateCourse() {
   const { userCourseInput, setUserCourseInput } = useContext(UserInputContext);
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
+  const router = useRouter();
   useEffect(() => {
     console.log(userCourseInput);
   }, [userCourseInput]);
@@ -76,7 +78,7 @@ function CreateCourse() {
     var id = uuid4();
     setLoading(true);
     const result = await db.insert(CourseList).values({
-      corseId: id,
+      courseId: id,
       name: userCourseInput?.topic,
       category: userCourseInput?.category,
       description: userCourseInput?.description,
@@ -88,6 +90,7 @@ function CreateCourse() {
       userProfileImage: user?.imageUrl,
     });
     console.log("Finished Course");
+    router.replace("/create-course/" + id);
     setLoading(false);
   };
 
