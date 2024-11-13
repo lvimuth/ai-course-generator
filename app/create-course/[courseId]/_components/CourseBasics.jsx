@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
 import { HiOutlinePuzzle } from "react-icons/hi";
+import EditCourseBasicInfo from "./EditCourseBasicInfo";
 
 function CourseBasics({ course }) {
   return (
@@ -10,6 +11,7 @@ function CourseBasics({ course }) {
         <div>
           <h2 className="font-bold text-3xl text-primary">
             {course?.courseOutput?.course_name}
+            <EditCourseBasicInfo course={course} />
           </h2>
           <p className="text-sm text-gray-400 mt-3">
             {course?.courseOutput?.description}
