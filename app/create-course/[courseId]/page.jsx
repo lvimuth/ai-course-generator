@@ -1,7 +1,7 @@
 "use client";
 
 import { db } from "@/config/db";
-import { CourseList } from "@/config/schema";
+import { Chapters, CourseList } from "@/config/schema";
 import { useUser } from "@clerk/nextjs";
 import { and, eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
@@ -12,11 +12,13 @@ import { Button } from "@/components/ui/button";
 import { GenerateChapterContent_AI } from "@/config/AIModel";
 import LoadingDialog from "../_components/LoadingDialog";
 import service from "@/config/service";
+import { useRouter } from "next/navigation";
 
 function CourseLayout({ params }) {
   const { user } = useUser();
   const [course, setCourse] = useState([]);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     console.log(params);
     params && GetCourse();
@@ -50,25 +52,31 @@ function CourseLayout({ params }) {
       console.log(PROMPT);
       if (index <= 3) {
         try {
-          let videoID = "";
-          // const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
-          // console.log(result?.response?.text());
-
+          let videoId = "";
+          const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
+          console.log(result?.response?.text());
+          const content = JSON.parse(result?.response?.text());
           //Generate Video URL
           service
             .getVideos(course?.name + ":" + chapter?.chapter_name)
             .then((resp) => {
               console.log(resp);
-              videoID = resp[0]?.id?.videoId;
+              videoId = resp[0]?.id?.videoId;
             });
 
           // Save Chapter Content + Video URL
-          // await db.insert(CourseList).values({})
+          await db.insert(Chapters).values({
+            chapterId: index,
+            courseId: course?.courseId,
+            content: content,
+            videoId: videoId,
+          });
           setLoading(false);
         } catch (error) {
           setLoading(false);
           console.log(error);
         }
+        router.replace("/create-course/" + course?.courseId + "/Finish");
       }
     });
   };
