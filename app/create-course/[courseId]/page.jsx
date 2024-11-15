@@ -11,6 +11,7 @@ import ChapterList from "./_components/ChapterList";
 import { Button } from "@/components/ui/button";
 import { GenerateChapterContent_AI } from "@/config/AIModel";
 import LoadingDialog from "../_components/LoadingDialog";
+import service from "@/config/service";
 
 function CourseLayout({ params }) {
   const { user } = useUser();
@@ -49,12 +50,20 @@ function CourseLayout({ params }) {
       console.log(PROMPT);
       if (index <= 3) {
         try {
-          const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
-          console.log(result?.response?.text());
+          let videoID = "";
+          // const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
+          // console.log(result?.response?.text());
 
           //Generate Video URL
+          service
+            .getVideos(course?.name + ":" + chapter?.chapter_name)
+            .then((resp) => {
+              console.log(resp);
+              videoID = resp[0]?.id?.videoId;
+            });
 
           // Save Chapter Content + Video URL
+          // await db.insert(CourseList).values({})
           setLoading(false);
         } catch (error) {
           setLoading(false);
