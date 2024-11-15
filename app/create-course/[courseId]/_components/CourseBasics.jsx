@@ -3,13 +3,38 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { HiOutlinePuzzle } from "react-icons/hi";
 import EditCourseBasicInfo from "./EditCourseBasicInfo";
+import { storage } from "@/config/FireBaseConfig";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { db } from "@/config/db";
+import { CourseList } from "@/config/schema";
+import { eq } from "drizzle-orm";
 
 function CourseBasics({ course, refreshData }) {
   const [selectedFile, setSelectedFile] = useState();
-  const onFileSelected = (event) => {
+
+  const onFileSelected = async (event) => {
     const file = event.target.files[0];
     console.log(file);
     setSelectedFile(URL.createObjectURL(file));
+
+    const fileName = Date.now() + "+.jpg";
+
+    const storageRef = ref(storage, "ai-course/" + fileName);
+    await uploadBytes(storageRef, file)
+      .then((snapshot) => {
+        console.log("File uploaded successfully");
+      })
+      .then((resp) => {
+        getDownloadURL(storageRef).then(async (downloadURL) => {
+          console.log(downloadURL);
+          await db
+            .update(CourseList)
+            .set({
+              courseBanner: downloadURL,
+            })
+            .where(eq(CourseList.id, course?.id));
+        });
+      });
   };
 
   return (
@@ -35,7 +60,7 @@ function CourseBasics({ course, refreshData }) {
         <div className="flex flex-col justify-center items-center">
           <label htmlFor="upload-image">
             <Image
-              src={selectedFile?selectedFile:"/placeholder.png"}
+              src={selectedFile ? selectedFile : "/placeholder.png"}
               width={100}
               height={100}
               alt=""
