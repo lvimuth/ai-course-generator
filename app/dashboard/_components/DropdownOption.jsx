@@ -40,8 +40,7 @@ function DropdownOption({ children, handleOnDelete }) {
               Delete
             </DropdownMenuItem>
           </div>
-              </DropdownMenuContent>
-              
+        </DropdownMenuContent>
       </DropdownMenu>
       <AlertDialog open={openDialog}>
         <AlertDialogContent>
@@ -53,8 +52,15 @@ function DropdownOption({ children, handleOnDelete }) {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={() => handleOnDelete}>
+            <AlertDialogCancel onClick={() => setOpenDialog(false)}>
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                handleOnDelete();
+                setOpenDialog(false);
+              }}
+            >
               Continue
             </AlertDialogAction>
           </AlertDialogFooter>

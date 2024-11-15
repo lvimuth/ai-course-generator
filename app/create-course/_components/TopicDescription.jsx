@@ -32,9 +32,10 @@ function TopicDescription() {
       <div className="mt-5">
         <label htmlFor="" className="text-sm">
           Tell us more about your course, What you want to include in your
-          course [optional]
+          course
         </label>
         <Textarea
+          required
           placeholder="About your course"
           className="h-24 text-sm"
           defaultValue={userCourseInput?.description}
