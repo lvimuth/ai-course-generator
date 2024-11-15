@@ -50,34 +50,34 @@ function CourseLayout({ params }) {
         chapter?.chapter_name +
         " , in JSON format with lsit of array with fiels as title,description in details, code Example(<precode> format) if applicable.";
       console.log(PROMPT);
-      if (index <= 3) {
-        try {
-          let videoId = "";
-          const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
-          console.log(result?.response?.text());
-          const content = JSON.parse(result?.response?.text());
-          //Generate Video URL
-          service
-            .getVideos(course?.name + ":" + chapter?.chapter_name)
-            .then((resp) => {
-              console.log(resp);
-              videoId = resp[0]?.id?.videoId;
-            });
-
-          // Save Chapter Content + Video URL
-          await db.insert(Chapters).values({
-            chapterId: index,
-            courseId: course?.courseId,
-            content: content,
-            videoId: videoId,
+      try {
+        let videoId = "";
+        //Generate Video URL
+        service
+          .getVideos(course?.name + ":" + chapter?.chapter_name)
+          .then((resp) => {
+            console.log(resp);
+            videoId = resp[0]?.id?.videoId;
           });
-          setLoading(false);
-        } catch (error) {
-          setLoading(false);
-          console.log(error);
-        }
-        router.replace("/create-course/" + course?.courseId + "/Finish");
+
+        //Generate chapter description
+        const result = await GenerateChapterContent_AI.sendMessage(PROMPT);
+        console.log(result?.response?.text());
+        const content = JSON.parse(result?.response?.text());
+
+        // Save Chapter Content + Video URL
+        await db.insert(Chapters).values({
+          chapterId: index,
+          courseId: course?.courseId,
+          content: content,
+          videoId: videoId,
+        });
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        console.log(error);
       }
+      router.replace("/create-course/" + course?.courseId + "/Finish");
     });
   };
   return (

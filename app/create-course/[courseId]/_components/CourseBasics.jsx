@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiOutlinePuzzle } from "react-icons/hi";
 import EditCourseBasicInfo from "./EditCourseBasicInfo";
 import { storage } from "@/config/FireBaseConfig";
@@ -11,6 +11,12 @@ import { eq } from "drizzle-orm";
 
 function CourseBasics({ course, refreshData }) {
   const [selectedFile, setSelectedFile] = useState();
+
+  useEffect(() => {
+    if (course) {
+      setSelectedFile(course?.courseBanner);
+    }
+  }, [course]);
 
   const onFileSelected = async (event) => {
     const file = event.target.files[0];
