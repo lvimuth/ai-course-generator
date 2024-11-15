@@ -77,6 +77,10 @@ function CourseLayout({ params }) {
         setLoading(false);
         console.log(error);
       }
+
+      await db.update(CourseList).set({
+        published: true,
+      });
       router.replace("/create-course/" + course?.courseId + "/Finish");
     });
   };
