@@ -7,7 +7,9 @@ import React from "react";
 function Header() {
   return (
     <div className="flex justify-between p-5 shadow-sm">
-      <Image src={"/favicon.svg"} width={30} height={30} alt="" />
+      <Link href={"/"}>
+        <Image src={"/favicon.svg"} width={30} height={30} alt="" />
+      </Link>
       <div className="flex gap-2">
         <Link href={"/dashboard"}>
           <Button variant="outline">Dashboard</Button>
