@@ -37,12 +37,14 @@ function CourseCard({ course, responseData, displayUser = false }) {
         <h2 className="font-thin text-sm lg:font-medium flex justify-between items-center">
           {" "}
           {course?.courseOutput?.course_name}
-          <DropdownOption
-            handleOnDelete={() => handleOnDelete()}
-            course={course}
-          >
-            <HiDotsVertical />
-          </DropdownOption>
+          {!displayUser && (
+            <DropdownOption
+              handleOnDelete={() => handleOnDelete()}
+              course={course}
+            >
+              <HiDotsVertical />
+            </DropdownOption>
+          )}
         </h2>
         {console.log(course)}
         <p className="text-sm text-gray-400">{course?.category}</p>
@@ -56,15 +58,17 @@ function CourseCard({ course, responseData, displayUser = false }) {
             {course?.courseOutput?.difficulty_level}
           </h2>
         </div>
-        <div>
-          <Image
-            src={course?.userProfileImage}
-            width={30}
-            height={30}
-            className="rounded-full"
-          />
-          <h2>{course?.userName}</h2>
-        </div>
+        {displayUser && (
+          <div className="flex gap-2 items-center mt-2">
+            <Image
+              src={course?.userProfileImage}
+              width={30}
+              height={30}
+              className="rounded-full"
+            />
+            <h2 className="text-sm">{course?.userName}</h2>
+          </div>
+        )}
       </div>
     </div>
   );

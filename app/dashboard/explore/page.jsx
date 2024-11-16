@@ -3,15 +3,21 @@ import { db } from "@/config/db";
 import { CourseList } from "@/config/schema";
 import React, { useEffect, useState } from "react";
 import CourseCard from "../_components/CourseCard";
+import { Button } from "@/components/ui/button";
 
 function Explore() {
+  const [pageIndex, setPageIndex] = useState(0);
   const [courseList, setCourseList] = useState([]);
   useEffect(() => {
     GetAllCourse();
-  }, []);
+  }, [pageIndex]);
 
   const GetAllCourse = async () => {
-    const result = await db.select().from(CourseList).limit(9).offset(0);
+    const result = await db
+      .select()
+      .from(CourseList)
+      .limit(9)
+      .offset(pageIndex * 9);
     setCourseList(result);
     console.log(result);
   };
@@ -25,6 +31,14 @@ function Explore() {
             <CourseCard course={course} displayUser={true} />
           </div>
         ))}
+      </div>
+      <div className="flex justify-between m-5">
+        {pageIndex != 0 && (
+          <Button onClick={() => setPageIndex(pageIndex - 1)}>
+            Previous Page
+          </Button>
+        )}
+        <Button onClick={() => setPageIndex(pageIndex + 1)}>Next Page</Button>
       </div>
     </div>
   );
