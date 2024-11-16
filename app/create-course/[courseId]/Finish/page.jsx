@@ -56,7 +56,7 @@ function FinishScreen({ params }) {
         Congrats! Your course is ready{" "}
       </h2>
 
-      <CourseBasics course={course} refreshData={() => console.log()} />
+      <CourseBasics course={course} refreshData={() => console.log()} edit={false} />
       <h2 className="mt-3">Course URL:</h2>
       <div className="text-center text-gray-400 border p-2 rounded text-sm lg:flex gap-5 items-center justify-between">
         <span>{courseUrl}</span>

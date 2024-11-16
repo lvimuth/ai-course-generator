@@ -67,13 +67,15 @@ function CourseBasics({ course, refreshData, edit = true }) {
         </div>
         <div className="flex flex-col justify-center items-center">
           <label htmlFor="upload-image">
-            <Image
-              src={selectedFile ? selectedFile : "/placeholder.png"}
-              width={100}
-              height={100}
-              alt=""
-              className="object-cover rounded-xl text-primary cursor-pointer"
-            />
+            {edit && (
+              <Image
+                src={selectedFile ? selectedFile : "/placeholder.png"}
+                width={100}
+                height={100}
+                alt=""
+                className="object-cover rounded-xl text-primary cursor-pointer"
+              />
+            )}
           </label>
           <input
             type="file"

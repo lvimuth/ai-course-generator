@@ -14,10 +14,10 @@ function CreateCourseLayout({ children }) {
         value={{ userCourseInput, setUserCourseInput }}
       >
         <>
-          <div className="md:w-64 hidden md:block">
+          {/* <div className="md:w-64 hidden md:block">
             <SideBar />
-          </div>
-          <div className="md:ml-64">
+          </div> */}
+          <div>
             <Header />
             <div className="p-3 lg:py-10">{children}</div>
           </div>
