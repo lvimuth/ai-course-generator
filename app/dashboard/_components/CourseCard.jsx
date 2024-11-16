@@ -10,7 +10,7 @@ import { db } from "@/config/db";
 import { eq } from "drizzle-orm";
 import { CourseList } from "@/config/schema";
 
-function CourseCard({ course, responseData }) {
+function CourseCard({ course, responseData, displayUser = false }) {
   const handleOnDelete = async () => {
     const resp = await db
       .delete(CourseList)
@@ -37,7 +37,10 @@ function CourseCard({ course, responseData }) {
         <h2 className="font-thin text-sm lg:font-medium flex justify-between items-center">
           {" "}
           {course?.courseOutput?.course_name}
-          <DropdownOption handleOnDelete={() => handleOnDelete()} course={course}>
+          <DropdownOption
+            handleOnDelete={() => handleOnDelete()}
+            course={course}
+          >
             <HiDotsVertical />
           </DropdownOption>
         </h2>
@@ -52,6 +55,15 @@ function CourseCard({ course, responseData }) {
             <HiOutlineChartBar />
             {course?.courseOutput?.difficulty_level}
           </h2>
+        </div>
+        <div>
+          <Image
+            src={course?.userProfileImage}
+            width={30}
+            height={30}
+            className="rounded-full"
+          />
+          <h2>{course?.userName}</h2>
         </div>
       </div>
     </div>

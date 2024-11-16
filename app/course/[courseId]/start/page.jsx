@@ -6,6 +6,8 @@ import { and, eq } from "drizzle-orm";
 import React, { useEffect, useState } from "react";
 import ChapterListCard from "./_components/ChapterListCard";
 import ChapterContent from "./_components/ChapterContent";
+import Header from "@/app/dashboard/_components/header";
+
 
 function CourseStart({ params }) {
   const [selectedChapter, setSelectedChapter] = useState();
@@ -41,6 +43,10 @@ function CourseStart({ params }) {
 
   return (
     <div>
+      <div>
+        <Header />
+      </div>
+
       {/* Chapter list sidebar */}
       <div className="fixed md:w-64 hidden md:block h-screen ">
         <h2 className="font-medium text-md bg-primary p-3 text-white">
