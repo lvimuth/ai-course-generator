@@ -9,7 +9,7 @@ import { db } from "@/config/db";
 import { CourseList } from "@/config/schema";
 import { eq } from "drizzle-orm";
 
-function CourseBasics({ course, refreshData }) {
+function CourseBasics({ course, refreshData, edit = true }) {
   const [selectedFile, setSelectedFile] = useState();
 
   useEffect(() => {
@@ -49,10 +49,12 @@ function CourseBasics({ course, refreshData }) {
         <div>
           <h2 className="font-bold text-3xl text-primary">
             {course?.courseOutput?.course_name}
-            <EditCourseBasicInfo
-              course={course}
-              refreshData={() => refreshData(true)}
-            />
+            {edit && (
+              <EditCourseBasicInfo
+                course={course}
+                refreshData={() => refreshData(true)}
+              />
+            )}
           </h2>
           <p className="text-sm text-gray-400 mt-3">
             {course?.courseOutput?.description}

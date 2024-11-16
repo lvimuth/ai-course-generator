@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { HiOutlineTrash, HiOutlinePencilAlt } from "react-icons/hi";
+import {
+  HiOutlineTrash,
+  HiOutlinePencilAlt,
+  HiOutlineEye,
+} from "react-icons/hi";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,22 +23,31 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useRouter } from "next/navigation";
 
-function DropdownOption({ children, handleOnDelete }) {
+function DropdownOption({ children, handleOnDelete, course }) {
   const [openDialog, setOpenDialog] = useState(false);
-
+  const router = useRouter();
   return (
     <div>
       <DropdownMenu>
         <DropdownMenuTrigger>{children}</DropdownMenuTrigger>
         <DropdownMenuContent>
-          <div className="hover:bg-green-400 rounded-sm ">
+          <div>
+            <DropdownMenuItem
+              onClick={() => router.replace("/course/" + course?.courseId)}
+            >
+              <HiOutlineEye />
+              View
+            </DropdownMenuItem>
+          </div>
+          <div>
             <DropdownMenuItem>
               <HiOutlinePencilAlt />
               Edit
             </DropdownMenuItem>
           </div>
-          <div className="hover:bg-red-400 rounded-sm">
+          <div>
             <DropdownMenuItem onClick={() => setOpenDialog(true)}>
               <HiOutlineTrash />
               Delete

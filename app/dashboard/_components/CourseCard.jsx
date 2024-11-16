@@ -37,7 +37,7 @@ function CourseCard({ course, responseData }) {
         <h2 className="font-thin text-sm lg:font-medium flex justify-between items-center">
           {" "}
           {course?.courseOutput?.course_name}
-          <DropdownOption handleOnDelete={() => handleOnDelete()}>
+          <DropdownOption handleOnDelete={() => handleOnDelete()} course={course}>
             <HiDotsVertical />
           </DropdownOption>
         </h2>
