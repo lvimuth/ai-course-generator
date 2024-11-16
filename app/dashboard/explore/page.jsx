@@ -16,7 +16,7 @@ function Explore() {
     const result = await db
       .select()
       .from(CourseList)
-      .limit(9)
+      .limit(10)
       .offset(pageIndex * 9);
     setCourseList(result);
     console.log(result);
@@ -38,7 +38,7 @@ function Explore() {
             Previous Page
           </Button>
         )}
-        <Button onClick={() => setPageIndex(pageIndex + 1)}>Next Page</Button>
+        {courseList.length>9&&<Button onClick={() => setPageIndex(pageIndex + 1)}>Next Page</Button>}
       </div>
     </div>
   );
