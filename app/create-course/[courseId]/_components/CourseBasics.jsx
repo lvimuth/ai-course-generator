@@ -8,6 +8,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { db } from "@/config/db";
 import { CourseList } from "@/config/schema";
 import { eq } from "drizzle-orm";
+import Link from "next/link";
 
 function CourseBasics({ course, refreshData, edit = true }) {
   const [selectedFile, setSelectedFile] = useState();
@@ -63,7 +64,11 @@ function CourseBasics({ course, refreshData, edit = true }) {
             <HiOutlinePuzzle />
             {course?.category}
           </h2>
-          <Button className="w-full">Start</Button>
+          {!edit && (
+            <Link href={"/course/" + course?.courseId + "/start"}>
+              <Button className="w-full">Start</Button>
+            </Link>
+          )}
         </div>
         <div className="flex flex-col justify-center items-center">
           <label htmlFor="upload-image">
