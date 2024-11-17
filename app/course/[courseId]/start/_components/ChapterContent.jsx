@@ -1,4 +1,5 @@
 import React from "react";
+import Markdown from "react-markdown";
 import YouTube from "react-youtube";
 
 const opts = {
@@ -25,11 +26,17 @@ function ChapterContent({ chapter, content }) {
           {content?.content?.map((item, index) => (
             <div className="p-5 bg-gray-50 mb-3 rounded-lg">
               <h2 className="font-medium text-lg">{item.title}</h2>
-              <p className="whitespace-pre-wrap">{item.description}</p>
+              {console.log("item", item)}
+              {/* <p className="whitespace-pre-wrap">{item.description}</p> */}
+              <Markdown>{item.description}</Markdown>
               {item.codeExample && (
                 <div className="p-4 bg-black mt-3 rounded-md text-white">
                   <pre>
-                    <code>{item.codeExample}</code>
+                    <code>
+                      {item.codeExample
+                        .replace("<pre><code>", "")
+                        .replace("</code></pre>", "")}
+                    </code>
                   </pre>
                 </div>
               )}

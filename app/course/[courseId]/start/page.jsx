@@ -8,7 +8,6 @@ import ChapterListCard from "./_components/ChapterListCard";
 import ChapterContent from "./_components/ChapterContent";
 import Header from "@/app/dashboard/_components/header";
 
-
 function CourseStart({ params }) {
   const [selectedChapter, setSelectedChapter] = useState();
   const [chapterContent, setChapterContent] = useState();
@@ -44,7 +43,7 @@ function CourseStart({ params }) {
   return (
     <div>
       <div>
-        <Header />
+        <Header className="fixed top-0 left-0" />
       </div>
 
       {/* Chapter list sidebar */}
